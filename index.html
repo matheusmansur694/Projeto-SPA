@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA</title>
+    <link rel="stylesheet" href=",/style.css">
+    <style>
+        nav{
+            font-size: 2em;
+        }
+
+        nav a{
+            text-decoration: none;
+            color: #FFF;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#">Séries</a>
+        <a href="#">Linguagens</a>
+    </nav>
+
+    <div class="pagina"></div>
+
+    <script>
+        function navegarViaAjax(url, seletor, push = true){
+            if(!url || !seletor) return
+            const elemento = document.querySelector(seletor)
+            fetch(url)
+            .then(resp => resp.text())
+            .then(html =>{
+                elemento.innerHTML = html
+                if(push){
+                    history.pushState({ seletor }, "Página Ajax", url)
+                }
+            })
+        }
+    </script>
+</body>
+</html>
