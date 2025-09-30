@@ -1,58 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPA</title>
-    <link rel="stylesheet" href=",/style.css">
-    <style>
-        nav{
-            font-size: 2em;
-        }
-
-        nav a{
-            text-decoration: none;
-            color: black;
-            padding: 0 10px;
-        }
-    </style>
+    <title>SPA - Single Page Application</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href wm-link="series.html" wm-destino=".pagina">Séries</a> |
-        <a href wm-link="linguagens.html" wm-destino=".pagina">Linguagens</a>
-    </nav>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">🎬 SPA App</h1>
+            <p class="subtitle">Explore séries e linguagens de programação</p>
+        </header>
 
-    <div class="pagina"></div>
+        <nav class="navigation">
+            <a href="#" wm-link="series.html" wm-destino=".pagina" class="nav-link active">
+                <span class="nav-icon">📺</span>
+                Séries Netflix
+            </a>
+            <a href="#" wm-link="linguagens.html" wm-destino=".pagina" class="nav-link">
+                <span class="nav-icon">💻</span>
+                Linguagens
+            </a>
+        </nav>
 
-    <script>
-        function navegarViaAjax(url, seletor, push = true){
-            if(!url || !seletor) return
-            const elemento = document.querySelector(seletor)
-            fetch(url)
-                .then(resp => resp.text())
-                .then(html =>{
-                    elemento.innerHTML = html
-                    if(push){
-                        history.pushState({ seletor }, "Página Ajax", url)
-                }
-            })
-        }
+        <main class="main-content">
+            <div class="pagina welcome-page">
+                <div class="welcome-container">
+                    <div class="welcome-icon">🚀</div>
+                    <h2>Bem-vindo à SPA App</h2>
+                    <p>Clique em um dos botões acima para explorar o conteúdo</p>
+                    <div class="features">
+                        <div class="feature">
+                            <span>🎯</span>
+                            <p>Navegação suave</p>
+                        </div>
+                        <div class="feature">
+                            <span>⚡</span>
+                            <p>Carregamento rápido</p>
+                        </div>
+                        <div class="feature">
+                            <span>🎨</span>
+                            <p>Design moderno</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
-        document.querySelectorAll('[wm-link]').forEach(link => {
-            const url = link.attributes['wm-link'].value
-            const seletorDestino = link.attributes['wm-destino'].value
-
-            link.onclick = e => {
-                e.preventDefault()
-                navegarViaAjax(url, seletorDestino)
-            }
-        })
-
-        window.onpopstate = e => {
-            if(e.state){
-                navegarViaAjax(window.location.href, e.state.seletor, false)
-            }
-        }
-    </script>
+    <script src="./app.js"></script>
 </body>
+</html>
